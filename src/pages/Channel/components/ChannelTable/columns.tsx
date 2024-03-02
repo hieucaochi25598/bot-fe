@@ -9,6 +9,7 @@ export const useChannelColumns = () => {
         {
             title: 'Channel ID',
             dataIndex: 'channelId',
+            width: 200,
             key: 'channelId',
         },
         {

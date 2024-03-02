@@ -1,6 +1,6 @@
 import { AddBotChatRequest } from '../types/request/AddBotChatRequest';
 import { GetBotChatQueryParams } from '../types/request/GetBotChatQueryParams';
-import { axiosInstance } from './channel';
+import { axiosInstance } from './axios';
 
 export const fetchBotChats = async (query?: GetBotChatQueryParams) => {
     const response = await axiosInstance.get('/bots', { params: query });

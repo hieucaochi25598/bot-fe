@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import channelReducer from '../../features/channel/channelSlice';
 import aiReducer from '../../features/ai/aiSlice';
 import botChatReducer from '../../features/botchat/botChatSlice';
+import intergrateReducer from '../../features/intergrate/intergrateSlice';
 
 export const store = configureStore({
     reducer: {
         channel: channelReducer,
         ai: aiReducer,
         botChat: botChatReducer,
+        intergrate: intergrateReducer,
     },
     devTools: import.meta.env.DEV,
 });

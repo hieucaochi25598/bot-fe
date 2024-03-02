@@ -7,7 +7,7 @@ const axiosInstance = axios.create({
     // Other optional configuration here
 });
 
-export const fetchAIs = async (query: GetAIQueryParams) => {
+export const fetchAIs = async (query?: GetAIQueryParams) => {
     const response = await axiosInstance.get('/ai-models', { params: query });
     return response.data;
 };

@@ -7,7 +7,7 @@ import {
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Layout, Menu, theme } from 'antd';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 const { Content, Sider } = Layout;
 
@@ -19,6 +19,7 @@ const RootLayout: React.FC = () => {
     } = theme.useToken();
 
     const navigate = useNavigate();
+    const location = useLocation();
 
     function getItem(
         label: React.ReactNode,
@@ -42,8 +43,8 @@ const RootLayout: React.FC = () => {
     ];
 
     useEffect(() => {
-        navigate('/channels');
-    }, []);
+        if (location.pathname === '/') navigate('/channels');
+    }, [navigate, location]);
 
     return (
         <Layout style={{ minHeight: '100vh' }}>
@@ -51,7 +52,11 @@ const RootLayout: React.FC = () => {
                 <div className="demo-logo-vertical" />
                 <Menu
                     theme="dark"
-                    defaultSelectedKeys={['/channels']}
+                    defaultSelectedKeys={[
+                        location.pathname === '/'
+                            ? '/channels'
+                            : location.pathname,
+                    ]}
                     mode="inline"
                     items={items}
                     onClick={(menuInfo) => navigate(menuInfo.key)}

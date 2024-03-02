@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import channelReducer from '../../features/channel/channelSlice';
+import aiReducer from '../../features/ai/aiSlice';
 
 export const store = configureStore({
     reducer: {
         channel: channelReducer,
+        ai: aiReducer,
     },
     devTools: import.meta.env.DEV,
 });

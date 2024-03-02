@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import channelReducer from '../../features/channel/channelSlice';
+import botChatReducer from '../../features/botchat/botChatSlice';
 
 export const store = configureStore({
     reducer: {
         channel: channelReducer,
+        botChat: botChatReducer,
     },
     devTools: import.meta.env.DEV,
 });

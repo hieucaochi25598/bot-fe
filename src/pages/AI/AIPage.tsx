@@ -77,7 +77,7 @@ const AIPage = () => {
         mutationFn: createAI,
         onSuccess: (data) => {
             handleCancelAddAIModal();
-            dispatch(addAI(data.AI));
+            dispatch(addAI(data.AIModel));
         },
     });
 

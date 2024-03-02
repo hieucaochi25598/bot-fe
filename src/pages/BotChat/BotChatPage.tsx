@@ -31,7 +31,6 @@ const BotChatPage = () => {
         data: botChatsData,
         isLoading: isLoadingFetchBotChatsData,
         isSuccess: isSuccessFetchBotChatsData,
-        isError: isErrorFetchBotChatsData,
     } = useQuery({
         queryKey: ['fetchBotChats', page],
         queryFn: () => fetchBotChats({ page, pageSize }),
@@ -52,12 +51,13 @@ const BotChatPage = () => {
             dispatch(setBotchats(botChatsData.items));
             dispatch(setTotal(botChatsData.totalCount));
         }
-    }, [isSuccessFetchBotChatsData, botChatsData]);
-
-    useEffect(() => {
-        if (isErrorFetchBotChatsData) {
-        }
-    }, [isErrorFetchBotChatsData]);
+    }, [
+        isSuccessFetchBotChatsData,
+        botChatsData,
+        dispatch,
+        setBotchats,
+        setTotal,
+    ]);
 
     const handleOpenAddBotChatModal = () => {
         setIsOpenAddBotChatModal(true);

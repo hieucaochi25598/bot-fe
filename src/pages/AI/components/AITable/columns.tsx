@@ -7,9 +7,14 @@ export const useAIColumns = () => {
 
     const columns: TableProps<IAI>['columns'] = [
         {
-            title: 'Type',
-            dataIndex: 'type',
-            key: 'type',
+            title: 'Time type',
+            dataIndex: 'timeType',
+            key: 'timeType',
+        },
+        {
+            title: 'Time',
+            dataIndex: 'time',
+            key: 'time',
         },
         {
             title: 'Prompt',

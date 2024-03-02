@@ -12,7 +12,8 @@ export type AIType = keyof typeof AITypeOptions;
 
 export interface IAI {
     _id: string;
-    type: AIType;
+    timeType: AIType;
+    time?: string;
     prompt: string;
     createdAt: string;
     updatedAt: string;

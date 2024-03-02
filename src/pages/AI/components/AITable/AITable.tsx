@@ -18,6 +18,8 @@ export const AITable: React.FC<AITablePropsTypes> = ({
     );
     const dispatch = useDispatch();
 
+    console.log('ais', ais);
+
     return (
         <Table
             loading={isLoading}

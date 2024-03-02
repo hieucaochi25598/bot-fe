@@ -1,2 +1,2 @@
-import { IAddChannelFormData } from './../form/IAddChannelFormData';
-export interface IAddChannelRequest extends IAddChannelFormData {}
+import { IAddAIFormData } from "../form/IAddAIFormData";
+export interface IAddAIRequest extends IAddAIFormData {}

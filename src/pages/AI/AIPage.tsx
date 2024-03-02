@@ -98,11 +98,7 @@ const AIPage = () => {
     };
 
     const handleOkClickAddAIModal = () => {
-        // form.submit();
-        // log data from form
-        form.validateFields().then((values) => {
-            console.log('values', values);
-        });
+        form.submit();
     };
 
     const handleCancelAddAIModal = () => {

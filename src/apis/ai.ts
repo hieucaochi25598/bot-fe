@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IAddAIRequest } from '../types/form/IAddAIRequest';
+import { IAddAIRequest } from '../types/request/AddAIRequest';
 import { GetAIQueryParams } from '../types/request/GetAIQueryParams';
 
 const axiosInstance = axios.create({
@@ -13,6 +13,6 @@ export const fetchAIs = async (query: GetAIQueryParams) => {
 };
 
 export const createAI = async (ai: IAddAIRequest) => {
-    const response = await axiosInstance.post('/ai/create', ai);
+    const response = await axiosInstance.post('/ai-models/create', ai);
     return response.data;
 };

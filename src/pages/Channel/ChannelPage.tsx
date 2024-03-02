@@ -33,7 +33,6 @@ const ChannelPage = () => {
         data: channelsData,
         isLoading: isLoadingFetchChannelsData,
         isSuccess: isSuccessFetchChannelsData,
-        isError: isErrorFetchChannelsData,
     } = useQuery({
         queryKey: ['fetchChannels', page],
         queryFn: () => fetchChannels({ page, pageSize }),
@@ -54,12 +53,13 @@ const ChannelPage = () => {
             dispatch(setChannels(channelsData.items));
             dispatch(setTotal(channelsData.totalCount));
         }
-    }, [isSuccessFetchChannelsData, channelsData]);
-
-    useEffect(() => {
-        if (isErrorFetchChannelsData) {
-        }
-    }, [isErrorFetchChannelsData]);
+    }, [
+        isSuccessFetchChannelsData,
+        channelsData,
+        dispatch,
+        setChannels,
+        setTotal,
+    ]);
 
     const handleOpenAddChannelModal = () => {
         setIsOpenAddChannelModal(true);

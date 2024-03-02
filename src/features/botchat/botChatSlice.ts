@@ -21,7 +21,6 @@ export const botChatSlice = createSlice({
     initialState,
     reducers: {
         setBotchats: (state, action: PayloadAction<IBotchat[]>) => {
-            console.log(action.payload);
             state.botChats = [...action.payload];
         },
 

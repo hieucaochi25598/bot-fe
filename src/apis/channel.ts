@@ -2,12 +2,12 @@ import axios from 'axios';
 import { IAddChannelRequest } from '../types/request/IAddChannelRequest';
 import { GetChannelQueryParams } from '../types/request/GetChannelQueryParams';
 
-const axiosInstance = axios.create({
+export const axiosInstance = axios.create({
     baseURL: `${import.meta.env.VITE_BOT_MANAGEMENT_API_URL}`,
     // Other optional configuration here
 });
 
-export const fetchChannels = async (query: GetChannelQueryParams) => {
+export const fetchChannels = async (query?: GetChannelQueryParams) => {
     const response = await axiosInstance.get('/channels', { params: query });
     return response.data;
 };

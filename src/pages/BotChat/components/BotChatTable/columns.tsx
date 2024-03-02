@@ -1,16 +1,21 @@
 import type { TableProps } from 'antd';
 import { useFormattedDate } from '../../../../hooks/useFormattedDate';
-import { IChannel } from '../../../../types/IChannel';
+import { IBotchat } from '../../../../types/IBotChat';
 
-export const useChannelColumns = () => {
+export const useBotChatColumns = () => {
     const { formattedDate } = useFormattedDate();
 
-    const columns: TableProps<IChannel>['columns'] = [
+    const columns: TableProps<IBotchat>['columns'] = [
         {
-            title: 'Channel ID',
-            dataIndex: 'channelId',
-            width: 200,
-            key: 'channelId',
+            title: 'Token',
+            dataIndex: 'token',
+            width: 400,
+            key: 'token',
+        },
+        {
+            title: 'Chat ID',
+            dataIndex: 'chatId',
+            key: 'chatId',
         },
         {
             title: 'Type',

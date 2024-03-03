@@ -48,10 +48,27 @@ const RootLayout: React.FC = () => {
 
     return (
         <Layout style={{ minHeight: '100vh' }}>
-            <Sider breakpoint="lg" collapsedWidth="0">
-                <div className="demo-logo-vertical" />
+            <Sider
+                breakpoint="lg"
+                collapsedWidth="0"
+                style={{ background: colorBgContainer }}
+            >
+                <div
+                    className="app-logo-sidebar"
+                    style={{
+                        padding: '10px',
+                        display: 'flex',
+                        justifyContent: 'center',
+                    }}
+                >
+                    <img
+                        src="/public/discord-logo.png"
+                        width="60%"
+                        height="65px"
+                    />
+                </div>
                 <Menu
-                    theme="dark"
+                    theme="light"
                     defaultSelectedKeys={[
                         location.pathname === '/'
                             ? '/channels'

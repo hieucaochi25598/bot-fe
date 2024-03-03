@@ -12,7 +12,7 @@ export const buildInitialNodesChannel = (array: any[], type: string) => {
 };
 
 export const buildInitialNodesAI = (array: any[], type: string) => {
-    let y = 0;
+    let y = -100;
     return array.map((e) => {
         y += 150;
         return {
@@ -25,7 +25,7 @@ export const buildInitialNodesAI = (array: any[], type: string) => {
 };
 
 export const buildInitialNodesBotChat = (array: any[], type: string) => {
-    let y = 0;
+    let y = -100;
     return array.map((e) => {
         y += 150;
         return {

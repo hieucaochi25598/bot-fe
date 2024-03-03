@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useCallback, useEffect, useMemo } from 'react';
 import ReactFlow, { useNodesState, useEdgesState, addEdge } from 'reactflow';
 import { useSelector, useDispatch } from 'react-redux';
@@ -20,7 +20,11 @@ import { fetchAIs } from '../../apis/ai';
 import { setAIs } from '../../features/ai/aiSlice';
 import { Button, Flex } from 'antd';
 import 'reactflow/dist/style.css';
-import { fetchIntergrates } from '../../apis/intergrate';
+import { createIntergrate, fetchIntergrates } from '../../apis/intergrate';
+import {
+    addIntergrate,
+    setIntergrates,
+} from '../../features/intergrate/intergrateSlice';
 
 const IntergrationPage = () => {
     const [nodes, setNodes, onNodesChange] = useNodesState([]);
@@ -28,6 +32,7 @@ const IntergrationPage = () => {
     const { channels } = useSelector((state: RootState) => state.channel);
     const { botChats } = useSelector((state: RootState) => state.botChat);
     const { ais } = useSelector((state: RootState) => state.ai);
+    const { intergrates } = useSelector((state: RootState) => state.intergrate);
     const dispatch = useDispatch();
 
     const nodeTypes = useMemo(
@@ -42,30 +47,47 @@ const IntergrationPage = () => {
         useQuery({
             queryKey: ['fetchAllIntergrates'],
             queryFn: () => fetchIntergrates(),
+            refetchOnWindowFocus: false,
         });
 
     const { data: channelsData, isSuccess: isSuccessFetchChannelsData } =
         useQuery({
             queryKey: ['fetchAllChannels'],
             queryFn: () => fetchChannels(),
+            refetchOnWindowFocus: false,
         });
 
     const { data: botChatsData, isSuccess: isSuccessFetchBotChatsData } =
         useQuery({
             queryKey: ['fetchAllBotChats'],
             queryFn: () => fetchBotChats(),
+            refetchOnWindowFocus: false,
         });
 
     const { data: aisData, isSuccess: isSuccessFetchAIsData } = useQuery({
         queryKey: ['fetchAllAIs'],
         queryFn: () => fetchAIs(),
+        refetchOnWindowFocus: false,
+    });
+
+    const { mutate: mutationCreateIntergrate } = useMutation({
+        mutationKey: ['createIntergrate'],
+        mutationFn: createIntergrate,
+        onSuccess: (data) => {
+            dispatch(addIntergrate(data.intergrate));
+        },
     });
 
     useEffect(() => {
-        if (isSuccessFetchChannelsData) {
-            dispatch(setChannels(channelsData.items));
+        if (isSuccessFetchIntergratesData) {
+            dispatch(setIntergrates(intergratesData.items));
         }
-    }, [dispatch, isSuccessFetchChannelsData, setChannels, channelsData]);
+    }, [
+        dispatch,
+        isSuccessFetchIntergratesData,
+        setIntergrates,
+        intergratesData,
+    ]);
 
     useEffect(() => {
         if (isSuccessFetchChannelsData) {
@@ -111,6 +133,44 @@ const IntergrationPage = () => {
         setNodes,
     ]);
 
+    useEffect(() => {
+        if (intergrates.length !== 0) {
+            //Set edge available for flow
+            let edge: any[] = [];
+            for (const intergrate of intergrates) {
+                let intergrateGroup = [];
+                const intergrateChannelAndAI = {
+                    source: intergrate.channel._id,
+                    sourceHandle: null,
+                    target: intergrate.ai._id,
+                    targetHandle: null,
+                    id: `reactflow__edge-${intergrate.channel._id}-${intergrate.ai._id}`,
+                    _available: true,
+                };
+
+                const intergrateAIAndBots = intergrate.bots.map((bot) => {
+                    return {
+                        source: intergrate.ai._id,
+                        sourceHandle: null,
+                        target: bot._id,
+                        targetHandle: null,
+                        id: `reactflow__edge-${intergrate.ai._id}-${bot._id}`,
+                        _available: true,
+                    };
+                });
+
+                intergrateGroup = [
+                    intergrateChannelAndAI,
+                    ...intergrateAIAndBots,
+                ];
+
+                edge = [...edge, ...intergrateGroup];
+            }
+
+            setEdges(edge);
+        }
+    }, [intergrates, setEdges]);
+
     const onConnect = useCallback(
         (params: any) => {
             setEdges((eds) => addEdge(params, eds));
@@ -118,11 +178,58 @@ const IntergrationPage = () => {
         [setEdges]
     );
 
-    const handleSaveIntergrate = () => {};
+    const handleSaveIntergrate = () => {
+        const edgesCloneDeep = [...edges] as any;
+        const newEdges = edgesCloneDeep.filter(
+            (e: { _available: boolean }) => !e._available
+        );
 
-    const handleCancelIntergrate = () => {};
+        let channelId = '';
+        let aiId = '';
+        let botIds: string[] = [];
 
-    console.log(edges);
+        // Iterate through edges array to extract required information
+        newEdges.forEach((edge: any, index: number) => {
+            if (!channelId) {
+                channelId = edge.source;
+            }
+            if (!aiId && edge.source !== channelId) {
+                aiId = edge.source;
+            }
+            if (index > 0) {
+                botIds.push(edge.target);
+            }
+        });
+
+        // Output the extracted data
+        const intergratePostRequest = {
+            channelId: channelId,
+            aiId: aiId,
+            botIds: botIds,
+        };
+
+        mutationCreateIntergrate(intergratePostRequest);
+    };
+
+    const handleCancelIntergrate = () => {
+        const edgesCloneDeep = [...edges] as any;
+        setEdges([
+            ...edgesCloneDeep.filter(
+                (e: { _available: boolean }) => e._available
+            ),
+        ]);
+    };
+
+    const isValidConnection = (connection: any) => {
+        const { source } = connection;
+        const isHaveChannelAndAIEdge = edges.some((e) => e.target === source);
+        const isAI = ais.some((ai) => ai._id === source);
+        if (!isHaveChannelAndAIEdge && isAI) {
+            return false;
+        }
+
+        return true;
+    };
 
     return (
         <>
@@ -137,6 +244,7 @@ const IntergrationPage = () => {
                 nodes={nodes}
                 nodeTypes={nodeTypes}
                 edges={edges}
+                isValidConnection={isValidConnection}
                 onNodesChange={onNodesChange}
                 onEdgesChange={onEdgesChange}
                 onConnect={onConnect}

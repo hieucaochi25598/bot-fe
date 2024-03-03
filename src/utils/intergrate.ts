@@ -1,5 +1,5 @@
 export const buildInitialNodesChannel = (array: any[], type: string) => {
-    let y = 0;
+    let y = -100;
     return array.map((e) => {
         y += 150;
         return {

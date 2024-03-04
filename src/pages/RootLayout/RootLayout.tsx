@@ -1,99 +1,96 @@
-import React, { useEffect } from 'react';
-import {
-    MergeOutlined,
-    MessageOutlined,
-    OpenAIOutlined,
-    RobotOutlined,
-} from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import { Layout, Menu, theme } from 'antd';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import React from "react";
+import Logo from "../../assets/logo.svg";
 
-const { Content, Sider } = Layout;
-
-type MenuItem = Required<MenuProps>['items'][number];
+import "./RootLayout.css";
 
 const RootLayout: React.FC = () => {
-    const {
-        token: { colorBgContainer, borderRadiusLG },
-    } = theme.useToken();
-
-    const navigate = useNavigate();
-    const location = useLocation();
-
-    function getItem(
-        label: React.ReactNode,
-        key: React.Key,
-        icon?: React.ReactNode,
-        children?: MenuItem[]
-    ): MenuItem {
-        return {
-            key,
-            icon,
-            children,
-            label,
-        } as MenuItem;
-    }
-
-    const items: MenuItem[] = [
-        getItem('Channel', '/channels', <MessageOutlined />),
-        getItem('AI', '/ais', <OpenAIOutlined />),
-        getItem('Bot', '/bots', <RobotOutlined />),
-        getItem('Intergration', '/intergrations', <MergeOutlined />),
-    ];
-
-    useEffect(() => {
-        if (location.pathname === '/') navigate('/channels');
-    }, [navigate, location]);
-
-    return (
-        <Layout style={{ minHeight: '100vh' }}>
-            <Sider
-                breakpoint="lg"
-                collapsedWidth="0"
-                style={{ background: colorBgContainer }}
-            >
-                <div
-                    className="app-logo-sidebar"
-                    style={{
-                        padding: '10px',
-                        display: 'flex',
-                        justifyContent: 'center',
-                    }}
-                >
-                    <img
-                        src="/public/discord-logo.png"
-                        width="60%"
-                        height="65px"
-                    />
-                </div>
-                <Menu
-                    theme="light"
-                    defaultSelectedKeys={[
-                        location.pathname === '/'
-                            ? '/channels'
-                            : location.pathname,
-                    ]}
-                    mode="inline"
-                    items={items}
-                    onClick={(menuInfo) => navigate(menuInfo.key)}
-                />
-            </Sider>
-            <Layout>
-                <Content
-                    style={{
-                        margin: '16px',
-                        padding: 24,
-                        minHeight: 280,
-                        background: colorBgContainer,
-                        borderRadius: borderRadiusLG,
-                    }}
-                >
-                    <Outlet />
-                </Content>
-            </Layout>
-        </Layout>
-    );
+  return (
+    <div
+      style={{
+        backgroundColor: "#abf600",
+        width: "100%",
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          height: 77,
+          marginTop: 34,
+          justifyContent: "space-evenly",
+        }}
+      >
+        <div style={{ display: "flex" }}>
+          <img src={Logo} alt="logo" />
+          <div
+            style={{
+              width: 174,
+              height: 20,
+              fontFamily: "Zen Dots",
+              alignSelf: "center",
+              fontSize: 20,
+              marginLeft: 16,
+            }}
+          >
+            Connect AI
+          </div>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "auto",
+            marginBottom: "auto",
+            marginRight: 200,
+          }}
+        >
+          <button
+            style={{
+              width: 122,
+              height: 50,
+              backgroundColor: "#ffffff",
+              borderRadius: 10,
+              border: "none",
+              fontFamily: "Zen Dots",
+              fontSize: 20,
+              marginRight: 16,
+            }}
+          >
+            Start
+          </button>
+          <button
+            style={{
+              width: 122,
+              height: 50,
+              backgroundColor: "#ffffff",
+              borderRadius: 10,
+              border: "none",
+              fontFamily: "Zen Dots",
+              fontSize: 20,
+              marginRight: 16,
+            }}
+          >
+            Settings
+          </button>
+          <button
+            style={{
+              width: 122,
+              height: 50,
+              backgroundColor: "#ffffff",
+              borderRadius: 10,
+              border: "none",
+              fontFamily: "Zen Dots",
+              fontSize: 20,
+            }}
+          >
+            Exit
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default RootLayout;

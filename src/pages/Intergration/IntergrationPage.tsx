@@ -208,7 +208,9 @@ const IntergrationPage = () => {
             botIds: botIds,
         };
 
-        mutationCreateIntergrate(intergratePostRequest);
+        if (aiId && channelId && botIds) {
+            mutationCreateIntergrate(intergratePostRequest);
+        }
     };
 
     const handleCancelIntergrate = () => {

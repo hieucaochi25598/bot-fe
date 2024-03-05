@@ -2,3 +2,8 @@
     font-family: 'Zen Dots';
     src: url('../../assets/ZenDots-Regular.ttf') format('truetype');
 }
+
+@font-face {
+    font-family: 'Porter Sans Block';
+    src: url('../../assets/porter-sans-inline-block-webfont.ttf') format('truetype');
+}

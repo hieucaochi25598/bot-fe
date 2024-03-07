@@ -1,135 +1,133 @@
-import React from "react";
-import Logo from "../../assets/logo.svg";
-
-import "./RootLayout.css";
-import { Button } from "antd";
+import React, { useEffect } from 'react';
+import Logo from '../../assets/logo.svg';
+import { Button } from 'antd';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { setMenuKey } from '../../features/app/appSlice';
+import { RootState } from '../../app/store/store';
+import './RootLayout.css';
 
 const RootLayout: React.FC = () => {
-  return (
-    <div
-      style={{
-        backgroundColor: "#abf600",
-        width: "100%",
-        height: "100vh",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          height: 77,
-          marginTop: 34,
-          justifyContent: "space-evenly",
-        }}
-      >
-        <div style={{ display: "flex" }}>
-          <img src={Logo} alt="logo" />
-          <div
-            style={{
-              width: 174,
-              height: 20,
-              fontFamily: "Zen Dots",
-              alignSelf: "center",
-              fontSize: 20,
-              marginLeft: 16,
-            }}
-          >
-            Connect AI
-          </div>
-        </div>
+    const navigate = useNavigate();
+    const { menuKey } = useSelector((state: RootState) => state.app);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        navigate('/channels');
+    }, [navigate]);
+
+    return (
         <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginTop: "auto",
-            marginBottom: "auto",
-            marginRight: 200,
-          }}
+            style={{
+                backgroundColor: '#abf600',
+                width: '100%',
+                height: '100vh',
+            }}
         >
-          <Button
-            style={{
-              width: 122,
-              height: 48,
-              backgroundColor: "#ffffff",
-              borderRadius: 8,
-              border: "1.5px solid #272833",
-              fontFamily: "Porter Sans Block",
-              fontSize: 20,
-              fontWeight: 400,
-              marginRight: 16,
-              boxShadow: "0px 4px 4px 0px #000000",
-            }}
-          >
-            DATA
-          </Button>
-          <Button
-            style={{
-              width: 122,
-              height: 48,
-              backgroundColor: "#ffffff",
-              borderRadius: 8,
-              border: "1.5px solid #272833",
-              fontFamily: "Porter Sans Block",
-              fontSize: 20,
-              fontWeight: 400,
-              marginRight: 16,
-              boxShadow: "0px 4px 4px 0px #000000",
-            }}
-          >
-            AI
-          </Button>
-          <Button
-            style={{
-              width: 122,
-              height: 48,
-              backgroundColor: "#ffffff",
-              borderRadius: 8,
-              fontFamily: "Porter Sans Block",
-              fontSize: 20,
-              fontWeight: 400,
-              border: "1.5px solid #272833",
-              boxShadow: "0px 4px 4px 0px #000000",
-            }}
-          >
-            BOT
-          </Button>
+            <div style={{ width: '50%', margin: '0 auto' }}>
+                <div style={{ position: 'relative' }}>
+                    <div
+                        style={{
+                            display: 'flex',
+                            padding: '20px 0',
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                        }}
+                    >
+                        <img src={Logo} alt="logo" />
+                        <div
+                            style={{
+                                width: 174,
+                                height: 20,
+                                fontFamily: 'Zen Dots',
+                                alignSelf: 'center',
+                                fontSize: 20,
+                                marginLeft: 16,
+                            }}
+                        >
+                            Connect AI
+                        </div>
+                    </div>
+                    <div
+                        className="group-menu-btn"
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            padding: '30px 0',
+                        }}
+                    >
+                        <Button
+                            className={`menu ${
+                                menuKey === '/channels' && 'menu-active'
+                            }`}
+                            onClick={() => {
+                                navigate('/channels');
+                                dispatch(setMenuKey('/channels'));
+                            }}
+                        >
+                            DATA
+                        </Button>
+                        <Button
+                            className={`menu ${
+                                menuKey === '/ais' && 'menu-active'
+                            }`}
+                            onClick={() => {
+                                navigate('/ais');
+                                dispatch(setMenuKey('/ais'));
+                            }}
+                        >
+                            AI
+                        </Button>
+                        <Button
+                            className={`menu ${
+                                menuKey === '/bots' && 'menu-active'
+                            }`}
+                            onClick={() => {
+                                navigate('/bots');
+                                dispatch(setMenuKey('/bots'));
+                            }}
+                        >
+                            BOT
+                        </Button>
+                    </div>
+                </div>
+                <div
+                    style={{
+                        height: '65vh',
+                        backgroundColor: '#ffffff',
+                        borderRadius: 24,
+                        border: '2px solid #272833',
+                        margin: 'auto',
+                        marginTop: 16,
+                        marginBottom: 16,
+                        padding: '50px 50px 0px 50px',
+                    }}
+                >
+                    <Outlet />
+                </div>
+                <div style={{ textAlign: 'center' }}>
+                    <Button
+                        style={{
+                            width: 177,
+                            height: 60,
+                            borderRadius: 8,
+                            border: '1px solid #ffffff',
+                            boxShadow: '0px 4px 4px 0px #000000',
+                            fontFamily: 'Porter Sans Block',
+                            fontSize: 20,
+                            alignSelf: 'center',
+                            marginTop: 16,
+                            backgroundColor: '#272833',
+                            color: '#ffffff',
+                        }}
+                    >
+                        PLAY
+                    </Button>
+                </div>
+            </div>
         </div>
-      </div>
-      <div
-        style={{
-          width: '65vw',
-          height: '70vh',
-          backgroundColor: "#ffffff",
-          borderRadius: 24,
-          border: "2px solid #272833",
-          margin: "auto",
-          marginTop: 16,
-          marginBottom: 16,
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-      </div>
-      <Button
-        style={{
-          width: 177,
-          height: 60,
-          borderRadius: 8,
-          border: "1px solid #ffffff",
-          boxShadow: "0px 4px 4px 0px #000000",
-          fontFamily: "Porter Sans Block",
-          fontSize: 20,
-          alignSelf: "center",
-          marginTop: 16,
-          backgroundColor: "#272833",
-          color: "#ffffff",
-        }}
-      >
-        PLAY
-      </Button>
-    </div>
-  );
+    );
 };
 
 export default RootLayout;

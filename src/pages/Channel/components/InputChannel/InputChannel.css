@@ -1,0 +1,30 @@
+.channel-input-container {
+    background-color: #f2fed1;
+    padding: 30px 0;
+    border-radius: 10px;
+    border: 2px solid #272833;
+    padding: 25px;
+}
+
+.channel-information-id,
+.channel-information-name {
+    padding: 20px 0;
+    border-bottom: 2px solid #272833;
+    width: 50%;
+    font-weight: 600;
+}
+
+.input-url-channelId {
+    border: 2px solid #272833;
+    padding: 10px;
+}
+
+.check-btn {
+    border: 2px solid #272833;
+    background-color: #272833;
+    color: #ffffff;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -3,6 +3,7 @@ import channelReducer from '../../features/channel/channelSlice';
 import aiReducer from '../../features/ai/aiSlice';
 import botChatReducer from '../../features/botchat/botChatSlice';
 import intergrateReducer from '../../features/intergrate/intergrateSlice';
+import appReducer from '../../features/app/appSlice';
 
 export const store = configureStore({
     reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
         ai: aiReducer,
         botChat: botChatReducer,
         intergrate: intergrateReducer,
+        app: appReducer,
     },
     devTools: import.meta.env.DEV,
 });

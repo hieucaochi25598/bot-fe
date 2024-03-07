@@ -4,6 +4,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 
 export interface ChannelState {
     channels: IChannel[];
+    channel: IChannel;
     page: number;
     pageSize: number;
     total: number;
@@ -11,6 +12,7 @@ export interface ChannelState {
 
 const initialState: ChannelState = {
     channels: [],
+    channel: {} as IChannel,
     page: 1,
     pageSize: 10,
     total: 0,
@@ -20,6 +22,10 @@ export const channelSlice = createSlice({
     name: 'channel',
     initialState,
     reducers: {
+        setChannel: (state, action: PayloadAction<IChannel>) => {
+            state.channel = action.payload;
+        },
+
         setChannels: (state, action: PayloadAction<IChannel[]>) => {
             state.channels = action.payload;
         },
@@ -40,7 +46,7 @@ export const channelSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setChannels, addChannel, setPage, setTotal } =
+export const { setChannels, setChannel, addChannel, setPage, setTotal } =
     channelSlice.actions;
 
 export default channelSlice.reducer;

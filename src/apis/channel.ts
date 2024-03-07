@@ -7,6 +7,11 @@ export const fetchChannels = async (query?: GetChannelQueryParams) => {
     return response.data;
 };
 
+export const fetchChannelDiscordById = async (id: string) => {
+    const response = await axiosInstance.get(`/channels-discord/${id}`);
+    return response.data;
+};
+
 export const createChannel = async (channel: IAddChannelRequest) => {
     const response = await axiosInstance.post('/channels/create', channel);
     return response.data;

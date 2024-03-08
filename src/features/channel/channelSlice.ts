@@ -14,7 +14,7 @@ const initialState: ChannelState = {
     channels: [],
     channel: {} as IChannel,
     page: 1,
-    pageSize: 10,
+    pageSize: 3,
     total: 0,
 };
 

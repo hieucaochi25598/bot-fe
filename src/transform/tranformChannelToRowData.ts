@@ -1,5 +1,3 @@
-import { IChannel } from '../types/IChannel';
-
 export const transformDiscordChannel = (channel: any) => {
     return {
         channelId: channel.id,

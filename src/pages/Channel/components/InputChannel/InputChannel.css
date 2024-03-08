@@ -4,6 +4,7 @@
     border-radius: 10px;
     border: 2px solid #272833;
     padding: 25px;
+    box-shadow: 0px 5px 0px 0px #191a23;
 }
 
 .channel-information-id,
@@ -27,4 +28,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.save-channel-btn {
+    margin-top: 20px;
+    border: 2px solid #272833;
+    background-color: #272833;
+    color: #ffff;
 }

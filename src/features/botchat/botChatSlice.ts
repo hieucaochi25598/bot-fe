@@ -4,6 +4,7 @@ import { IBotchat } from '../../types/IBotChat';
 
 export interface BotchatState {
     botChats: IBotchat[];
+    botChatInformation: IBotchat;
     page: number;
     pageSize: number;
     total: number;
@@ -11,8 +12,9 @@ export interface BotchatState {
 
 const initialState: BotchatState = {
     botChats: [],
+    botChatInformation: {} as IBotchat,
     page: 1,
-    pageSize: 10,
+    pageSize: 3,
     total: 0,
 };
 
@@ -22,6 +24,10 @@ export const botChatSlice = createSlice({
     reducers: {
         setBotchats: (state, action: PayloadAction<IBotchat[]>) => {
             state.botChats = [...action.payload];
+        },
+
+        setBotChatInformation: (state, action: PayloadAction<IBotchat>) => {
+            state.botChatInformation = action.payload;
         },
 
         addBotchat: (state, action: PayloadAction<IBotchat>) => {
@@ -40,7 +46,12 @@ export const botChatSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setBotchats, addBotchat, setPage, setTotal } =
-    botChatSlice.actions;
+export const {
+    setBotchats,
+    setBotChatInformation,
+    addBotchat,
+    setPage,
+    setTotal,
+} = botChatSlice.actions;
 
 export default botChatSlice.reducer;

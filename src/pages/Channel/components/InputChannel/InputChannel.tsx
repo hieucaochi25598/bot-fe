@@ -71,8 +71,14 @@ const InputChannel = () => {
 
     const onFinishCheckChannel = (formData: FieldType) => {
         const { channelId } = formData;
-        if (channelId) {
-            setInpuChannelId(channelId);
+
+        const regex = /\/(\d+)$/;
+        const match = channelId.match(regex);
+
+        if (match) {
+            const lastPortion = match[1];
+            setInpuChannelId(lastPortion);
+        } else {
         }
     };
 

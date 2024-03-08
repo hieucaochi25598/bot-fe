@@ -1,0 +1,23 @@
+.ant-modal-footer {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 10px;
+}
+
+.ok-btn-modal {
+    background-color: #abf600;
+    color: #272833;
+    border: 1px solid #272833;
+    height: unset;
+    padding: 10px 20px;
+    font-weight: 500;
+}
+
+.cancel-btn-modal {
+    background-color: #272833;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    height: unset;
+    padding: 10px 20px;
+    font-weight: 500;
+}

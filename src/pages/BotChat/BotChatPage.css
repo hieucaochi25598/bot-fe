@@ -1,0 +1,61 @@
+.btn-group {
+    position: relative;
+    overflow: hidden;
+}
+
+.rotate-container {
+    position: absolute;
+    width: 50px;
+    height: 100px;
+    background: white;
+    z-index: 1;
+    border: 0.5px solid #ffffff;
+    transform: rotate(60deg);
+    top: -143%;
+    left: 0;
+}
+
+.ant-btn.add-bot-btn {
+    border-radius: 10px;
+    background-color: #272833;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 10px 60px;
+    height: unset;
+}
+
+.btn-group:hover .rotate-container {
+    border-color: #4096ff;
+    transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.title-add-bot-modal {
+    color: #272833;
+    pointer-events: none;
+    border-radius: 10px;
+    border: none;
+    background-color: #abf600;
+    font-weight: 600;
+    font-size: 15px;
+    height: unset;
+    margin-bottom: 20px;
+}
+
+.add-bot-modal-content-container {
+    background: #f2fed1;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #272833;
+    margin-bottom: 20px;
+}
+
+.input-add-bot {
+    border-color: #272833;
+}
+
+.add-bot-modal {
+    border: 1px solid #272833;
+    border-color: #272833;
+    border-radius: 8px;
+    padding-bottom: 0;
+}

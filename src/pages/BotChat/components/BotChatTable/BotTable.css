@@ -1,0 +1,7 @@
+.common-row-active {
+    background: #e5f7cb;
+}
+
+.ant-table-tbody .ant-table-row.common-row-active > .ant-table-cell-row-hover {
+    background: #e5f7cb !important;
+}

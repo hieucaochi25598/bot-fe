@@ -13,14 +13,10 @@ export const useChannelColumns = () => {
             key: 'channelId',
         },
         {
-            title: 'Type',
-            dataIndex: 'type',
-            key: 'type',
-        },
-        {
             title: 'Name',
             dataIndex: 'name',
             key: 'name',
+            width: 300,
         },
         {
             title: 'Created At',

@@ -34,6 +34,6 @@
     border: 1.5px solid #ffffff !important;
 }
 
-.save-channel-btn {
-    margin-top: 20px;
+.ant-table-row {
+    cursor: pointer;
 }

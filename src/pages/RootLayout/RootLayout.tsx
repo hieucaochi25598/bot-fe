@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Logo from '../../assets/logo.svg';
 import { Button } from 'antd';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setMenuKey } from '../../features/app/appSlice';
 import { RootState } from '../../app/store/store';
@@ -9,11 +9,17 @@ import './RootLayout.css';
 
 const RootLayout: React.FC = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const { menuKey } = useSelector((state: RootState) => state.app);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        navigate('/channels');
+        if (location.pathname === '/') {
+            navigate('/channels');
+            dispatch(setMenuKey('/channels'));
+        } else {
+            dispatch(setMenuKey(location.pathname));
+        }
     }, [navigate]);
 
     return (
@@ -24,7 +30,7 @@ const RootLayout: React.FC = () => {
                 height: '100vh',
             }}
         >
-            <div style={{ width: '50%', margin: '0 auto' }}>
+            <div style={{ width: '60%', margin: '0 auto' }}>
                 <div style={{ position: 'relative' }}>
                     <div
                         style={{
@@ -94,14 +100,16 @@ const RootLayout: React.FC = () => {
                 </div>
                 <div
                     style={{
-                        height: '65vh',
+                        height: '70vh',
                         backgroundColor: '#ffffff',
                         borderRadius: 24,
                         border: '2px solid #272833',
                         margin: 'auto',
                         marginTop: 16,
                         marginBottom: 16,
-                        padding: '50px 50px 0px 50px',
+                        padding: '30px 30px 0px 30px',
+                        boxShadow: '0px 5px 0px 0px #191A23',
+                        overflow: 'auto',
                     }}
                 >
                     <Outlet />

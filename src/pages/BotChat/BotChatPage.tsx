@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { keepPreviousData, useMutation, useQuery } from '@tanstack/react-query';
 import { setTotal } from '../../features/botchat/botChatSlice';
-import { PlusOutlined } from '@ant-design/icons';
 import GeneralModal from '../../components/Modal/GeneralModal';
 import { Form, Input } from 'antd';
 import { useSelector } from 'react-redux';
@@ -11,7 +10,9 @@ import { RootState } from '../../app/store/store';
 import { createBotChat, fetchBotChats } from '../../apis/botchat';
 import { addBotchat, setBotchats } from '../../features/botchat/botChatSlice';
 import { AddBotChatFormData } from '../../types/form/AddBotChatFormData';
-import BotChatTable from './components/BotChatTable/ChannelTable';
+import BotChatTable from './components/BotChatTable/BotTable';
+import BotInformation from './components/BotInformation/BotInformation';
+import './BotChatPage.css';
 
 type FieldType = {
     token: string;
@@ -78,20 +79,39 @@ const BotChatPage = () => {
 
     return (
         <>
-            <Flex gap="large" vertical>
-                <Flex justify="flex-end" align="center">
-                    <Button type="primary" onClick={handleOpenAddBotChatModal}>
-                        {' '}
-                        <PlusOutlined />
-                        Add Bot
+            <Flex
+                align="center"
+                justify="space-between"
+                style={{ marginBottom: '20px' }}
+            >
+                <span style={{ fontSize: 24, fontWeight: 600 }}>#BOT</span>
+                <div className="btn-group">
+                    <div className="rotate-container"></div>
+                    <Button
+                        className="add-bot-btn"
+                        onClick={handleOpenAddBotChatModal}
+                    >
+                        ADD
                     </Button>
-                </Flex>
-                <GeneralModal
-                    title="Add Bot"
-                    isOpen={isOpenAddBotChatModal}
-                    onOk={handleOkClickAddBotChatModal}
-                    onCancel={handleCancelAddBotChatModal}
-                >
+                </div>
+            </Flex>
+
+            <BotInformation />
+            <BotChatTable isLoading={isLoadingFetchBotChatsData} />
+
+            <GeneralModal
+                className="add-bot-modal"
+                isOpen={isOpenAddBotChatModal}
+                onOk={handleOkClickAddBotChatModal}
+                okText="SAVE"
+                cancelText="CANCEL"
+                onCancel={handleCancelAddBotChatModal}
+            >
+                <div className="title-group">
+                    <div className="rotate-title-container"></div>
+                    <Button className="title-add-bot-modal">NEW BOT</Button>
+                </div>
+                <div className="add-bot-modal-content-container">
                     <Form
                         name="basic"
                         form={form}
@@ -110,7 +130,10 @@ const BotChatPage = () => {
                                 },
                             ]}
                         >
-                            <Input />
+                            <Input
+                                placeholder="Token"
+                                className="input-add-bot"
+                            />
                         </Form.Item>
                         <Form.Item<FieldType>
                             label="Chat ID"
@@ -122,7 +145,10 @@ const BotChatPage = () => {
                                 },
                             ]}
                         >
-                            <Input />
+                            <Input
+                                placeholder="Chat ID"
+                                className="input-add-bot"
+                            />
                         </Form.Item>
 
                         <Form.Item<FieldType>
@@ -135,7 +161,10 @@ const BotChatPage = () => {
                                 },
                             ]}
                         >
-                            <Input />
+                            <Input
+                                placeholder="Type"
+                                className="input-add-bot"
+                            />
                         </Form.Item>
                         <Form.Item<FieldType>
                             label="Name"
@@ -147,12 +176,14 @@ const BotChatPage = () => {
                                 },
                             ]}
                         >
-                            <Input />
+                            <Input
+                                placeholder="Name"
+                                className="input-add-bot"
+                            />
                         </Form.Item>
                     </Form>
-                </GeneralModal>
-                <BotChatTable isLoading={isLoadingFetchBotChatsData} />
-            </Flex>
+                </div>
+            </GeneralModal>
         </>
     );
 };

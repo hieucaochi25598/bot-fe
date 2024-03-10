@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { keepPreviousData, useMutation, useQuery } from '@tanstack/react-query';
 import { addAI, setAIs, setTotal } from '../../features/ai/aiSlice';
-import { PlusOutlined } from '@ant-design/icons';
 import GeneralModal from '../../components/Modal/GeneralModal';
 import { Form, Input } from 'antd';
 import { IAddAIFormData } from '../../types/form/IAddAIFormData';

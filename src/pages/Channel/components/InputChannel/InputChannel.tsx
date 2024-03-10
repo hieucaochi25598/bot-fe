@@ -136,7 +136,7 @@ const InputChannel = () => {
                         className="save-channel-btn"
                         onClick={handleCreateChannel}
                     >
-                        Save
+                        ADD
                     </Button>
                 )}
             </div>

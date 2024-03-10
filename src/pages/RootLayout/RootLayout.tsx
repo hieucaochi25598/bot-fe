@@ -115,23 +115,26 @@ const RootLayout: React.FC = () => {
                     <Outlet />
                 </div>
                 <div style={{ textAlign: 'center' }}>
-                    <Button
-                        style={{
-                            width: 177,
-                            height: 60,
-                            borderRadius: 8,
-                            border: '1px solid #ffffff',
-                            boxShadow: '0px 4px 4px 0px #000000',
-                            fontFamily: 'Porter Sans Block',
-                            fontSize: 20,
-                            alignSelf: 'center',
-                            marginTop: 16,
-                            backgroundColor: '#272833',
-                            color: '#ffffff',
-                        }}
-                    >
-                        PLAY
-                    </Button>
+                    {location.pathname !== '/intergrations' && (
+                        <Button
+                            style={{
+                                width: 177,
+                                height: 60,
+                                borderRadius: 8,
+                                border: '1px solid #ffffff',
+                                boxShadow: '0px 4px 4px 0px #000000',
+                                fontFamily: 'Porter Sans Block',
+                                fontSize: 20,
+                                alignSelf: 'center',
+                                marginTop: 16,
+                                backgroundColor: '#272833',
+                                color: '#ffffff',
+                            }}
+                            onClick={() => navigate('/intergrations')}
+                        >
+                            PLAY
+                        </Button>
+                    )}
                 </div>
             </div>
         </div>

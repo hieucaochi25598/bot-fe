@@ -4,6 +4,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 
 export interface AIState {
     ais: IAI[];
+    aiInformation: IAI;
     page: number;
     pageSize: number;
     total: number;
@@ -11,8 +12,9 @@ export interface AIState {
 
 const initialState: AIState = {
     ais: [],
+    aiInformation: {} as IAI,
     page: 1,
-    pageSize: 10,
+    pageSize: 3,
     total: 0,
 };
 
@@ -22,6 +24,10 @@ export const aiSlice = createSlice({
     reducers: {
         setAIs: (state, action: PayloadAction<IAI[]>) => {
             state.ais = action.payload;
+        },
+
+        setAI: (state, action: PayloadAction<IAI>) => {
+            state.aiInformation = action.payload;
         },
 
         addAI: (state, action: PayloadAction<IAI>) => {
@@ -40,7 +46,6 @@ export const aiSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setAIs, addAI, setPage, setTotal } =
-    aiSlice.actions;
+export const { setAIs, setAI, addAI, setPage, setTotal } = aiSlice.actions;
 
 export default aiSlice.reducer;

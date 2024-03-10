@@ -1,0 +1,38 @@
+.custom-node {
+    border-radius: 50%;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+    border: 1px solid #272833;
+    flex-direction: column;
+}
+.custom-node-channel {
+    background-color: rgb(171, 246, 0);
+    color: #272833;
+    font-weight: 600;
+}
+
+.custom-node-channel span {
+    display: block;
+}
+
+.custom-node-ai {
+    background-color: #fc77ff;
+    color: #272833;
+    font-weight: 600;
+    font-size: 20px;
+    max-width: 200px;
+    text-align: center;
+}
+
+.custom-node-bot {
+    background-color: #2e5aac;
+    color: #272833;
+    font-weight: 600;
+    font-size: 20px;
+    width: 150px;
+    text-align: center;
+}

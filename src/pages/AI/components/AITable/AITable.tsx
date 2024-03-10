@@ -4,6 +4,8 @@ import { useAIColumns } from './columns';
 import { RootState } from '../../../../app/store/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { setPage } from '../../../../features/channel/channelSlice';
+import { setAI } from '../../../../features/ai/aiSlice';
+import './AITable.css';
 
 export type AITablePropsTypes = {
     isLoading: boolean;
@@ -13,13 +15,25 @@ export const AITable: React.FC<AITablePropsTypes> = ({
     isLoading,
 }: AITablePropsTypes) => {
     const { columns } = useAIColumns();
-    const { ais, total, pageSize } = useSelector(
+    const { ais, aiInformation, total, pageSize } = useSelector(
         (state: RootState) => state.ai
     );
     const dispatch = useDispatch();
 
     return (
         <Table
+            onRow={(record, rowIndex) => {
+                return {
+                    onClick: (event) => {
+                        dispatch(setAI(record));
+                    },
+                };
+            }}
+            rowClassName={(record, index) => {
+                return record._id === aiInformation._id
+                    ? 'common-row-active'
+                    : 'common-row';
+            }}
             loading={isLoading}
             columns={columns}
             pagination={{

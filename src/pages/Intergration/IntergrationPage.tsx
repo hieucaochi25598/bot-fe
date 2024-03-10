@@ -25,6 +25,7 @@ import {
     addIntergrate,
     setIntergrates,
 } from '../../features/intergrate/intergrateSlice';
+import './IntergrationPage.css';
 
 const IntergrationPage = () => {
     const [nodes, setNodes, onNodesChange] = useNodesState([]);
@@ -236,10 +237,22 @@ const IntergrationPage = () => {
     return (
         <>
             <Flex gap="small">
-                <Button type="primary" onClick={handleSaveIntergrate}>
-                    Save
+                <div>
+                    <Button
+                        className="save-intergrate-btn"
+                        type="primary"
+                        onClick={handleSaveIntergrate}
+                    >
+                        START
+                    </Button>
+                </div>
+
+                <Button
+                    className="undo-intergrate-btn"
+                    onClick={handleCancelIntergrate}
+                >
+                    Undo
                 </Button>
-                <Button onClick={handleCancelIntergrate}>Cancel</Button>
             </Flex>
 
             <ReactFlow
@@ -250,6 +263,7 @@ const IntergrationPage = () => {
                 onNodesChange={onNodesChange}
                 onEdgesChange={onEdgesChange}
                 onConnect={onConnect}
+                defaultViewport={{ x: 0, y: 0, zoom: 0.8 }}
             />
         </>
     );

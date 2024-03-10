@@ -1,0 +1,17 @@
+.save-intergrate-btn {
+    border-radius: 10px;
+    background-color: #272833;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 10px 60px;
+    height: unset;
+}
+
+.undo-intergrate-btn {
+    border-radius: 10px;
+    background-color: #ffffff;
+    color: #272833;
+    font-weight: 600;
+    padding: 10px 60px;
+    height: unset;
+}

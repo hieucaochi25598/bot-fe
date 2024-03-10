@@ -1,12 +1,13 @@
-import { Card } from 'antd';
 import { Handle, Position } from 'reactflow';
+import './CustomNode.css';
 
 const CustomChannelNode = ({ data }: any) => {
     return (
         <>
-            <Card title={data.name} style={{ width: '250px' }}>
-                {data.channelId}
-            </Card>
+            <div className="custom-node custom-node-channel">
+                <span>{data.channelId}</span>
+                <span># {data.name}</span>
+            </div>
             <Handle type="source" position={Position.Right} />
         </>
     );

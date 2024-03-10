@@ -1,0 +1,47 @@
+.ai-information-container {
+    background-color: #f2fed1;
+    padding: 30px 0;
+    border-radius: 10px;
+    border: 2px solid #272833;
+    padding: 25px;
+    box-shadow: 0px 5px 0px 0px #191a23;
+}
+
+.ai-information {
+    width: 70%;
+}
+
+.ai-information-name {
+    font-size: 20px;
+    border-radius: 10px;
+    background-color: #cdced9;
+    border: 1px solid #000000;
+    font-weight: 600;
+    padding: 10px;
+}
+
+.ai-information-createdAt,
+.ai-information-updatedAt {
+    border-bottom: 1px solid #000000;
+    padding: 10px;
+    font-weight: 600;
+}
+
+.ant-btn.add-ai-btn {
+    border-radius: 10px;
+    background-color: #272833;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 10px 60px;
+    height: unset;
+}
+
+.ai-information-icon {
+    display: flex;
+    background: #404040;
+    align-items: center;
+    font-size: 100px;
+    color: rgb(171, 246, 0);
+    padding: 49px 65px;
+    border-radius: 24px;
+}

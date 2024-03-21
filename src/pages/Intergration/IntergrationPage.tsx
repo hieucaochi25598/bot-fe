@@ -181,9 +181,18 @@ const IntergrationPage = () => {
 
     const handleSaveIntergrate = () => {
         const edgesCloneDeep = [...edges] as any;
+        console.log(edgesCloneDeep);
         const newEdges = edgesCloneDeep.filter(
             (e: { _available: boolean }) => !e._available
         );
+
+        console.log(newEdges);
+
+        const oldEdges = edgesCloneDeep.filter(
+            (e: { _available: boolean }) => e._available
+        );
+
+        console.log(oldEdges);
 
         let channelId = '';
         let aiId = '';

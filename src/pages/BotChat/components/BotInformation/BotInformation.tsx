@@ -1,7 +1,7 @@
-import { useSelector } from 'react-redux';
-import { Flex } from 'antd';
-import { RootState } from '../../../../app/store/store';
-import './BotInformation.css';
+import { useSelector } from "react-redux";
+import { Flex } from "antd";
+import { RootState } from "../../../../app/store/store";
+import "./BotInformation.css";
 
 const BotInformation = () => {
     const { botChatInformation } = useSelector(
@@ -11,15 +11,17 @@ const BotInformation = () => {
     return (
         <div className="bot-information-container">
             <Flex gap="middle" justify="space-between">
-                <div className="bot-information-img">
+                <div
+                    className="bot-information-img"
+                    style={{ width: 223, height: 200 }}
+                >
                     <img src="/bot.png" alt="bot-img" />
                 </div>
                 <Flex className="bot-information" vertical gap="middle">
-                    {Object.keys(botChatInformation).length !== 0 && (
-                        <div className="bot-information-name">
-                            {botChatInformation.name}
-                        </div>
-                    )}
+                    <div className="bot-information-name">
+                        <span>NAME</span>
+                        <span>{botChatInformation.name}</span>
+                    </div>
                     <div className="bot-information-token">
                         <Flex justify="space-between">
                             <span>TOKEN</span>

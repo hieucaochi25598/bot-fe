@@ -8,6 +8,7 @@ import {
     setPage,
 } from '../../../../features/botchat/botChatSlice';
 import './BotTable.css';
+import CustomTable from '../../../../components/CustomTable/CustomTable';
 
 export type BotChatTablePropsTypes = {
     isLoading: boolean;
@@ -23,31 +24,44 @@ export const BotChatTable: React.FC<BotChatTablePropsTypes> = ({
     const dispatch = useDispatch();
 
     return (
-        <Table
-            onRow={(record, rowIndex) => {
-                return {
-                    onClick: (event) => {
-                        dispatch(setBotChatInformation(record));
-                    },
-                };
-            }}
-            rowClassName={(record, index) => {
-                return record._id === botChatInformation._id
-                    ? 'common-row-active'
-                    : 'common-row';
-            }}
-            loading={isLoading}
+        // <Table
+        //     onRow={(record, rowIndex) => {
+        //         return {
+        //             onClick: (event) => {
+        //                 dispatch(setBotChatInformation(record));
+        //             },
+        //         };
+        //     }}
+        //     rowClassName={(record, index) => {
+        //         return record._id === botChatInformation._id
+        //             ? 'common-row-active'
+        //             : 'common-row';
+        //     }}
+        //     loading={isLoading}
+        //     columns={columns}
+        //     pagination={{
+        //         total,
+        //         pageSize,
+        //         onChange: (page) => {
+        //             dispatch(setPage(page));
+        //         },
+        //     }}
+        //     dataSource={botChats}
+        //     scroll={{ x: 2000 }}
+        //     rowKey="_id"
+        // />
+        <CustomTable
             columns={columns}
+            dataSource={botChats}
+            rowKey="_id"
+            loading={isLoading}
             pagination={{
                 total,
                 pageSize,
-                onChange: (page) => {
+                onChange: (page: number) => {
                     dispatch(setPage(page));
                 },
             }}
-            dataSource={botChats}
-            scroll={{ x: 2000 }}
-            rowKey="_id"
         />
     );
 };

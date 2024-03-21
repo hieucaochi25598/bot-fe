@@ -44,7 +44,6 @@ export const AITable: React.FC<AITablePropsTypes> = ({
                 },
             }}
             dataSource={ais}
-            scroll={{ x: 2000 }}
             rowKey="_id"
         />
     );

@@ -1,21 +1,21 @@
-import AITable from './components/AITable/AITable';
-import type { DatePickerProps, TimePickerProps } from 'antd';
-import { Button, DatePicker, Flex, Select, Tabs, TimePicker } from 'antd';
-import { createAI, fetchAIs } from '../../apis/ai';
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { keepPreviousData, useMutation, useQuery } from '@tanstack/react-query';
-import { addAI, setAIs, setTotal } from '../../features/ai/aiSlice';
-import GeneralModal from '../../components/Modal/GeneralModal';
-import { Form, Input } from 'antd';
-import { IAddAIFormData } from '../../types/form/IAddAIFormData';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../app/store/store';
-import TabPane from 'antd/es/tabs/TabPane';
-import { AITypeOptions, PromptTypeOptions } from '../../types/IAI';
-import AIInformation from './components/AIInformation/AIInformation';
-import './AIPage.css';
-type PickerType = 'time' | 'date';
+import AITable from "./components/AITable/AITable";
+import type { DatePickerProps, TimePickerProps } from "antd";
+import { Button, DatePicker, Flex, Select, Tabs, TimePicker } from "antd";
+import { createAI, fetchAIs } from "../../apis/ai";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { keepPreviousData, useMutation, useQuery } from "@tanstack/react-query";
+import { addAI, setAIs, setTotal } from "../../features/ai/aiSlice";
+import GeneralModal from "../../components/Modal/GeneralModal";
+import { Form, Input } from "antd";
+import { IAddAIFormData } from "../../types/form/IAddAIFormData";
+import { useSelector } from "react-redux";
+import { RootState } from "../../app/store/store";
+import TabPane from "antd/es/tabs/TabPane";
+import { AITypeOptions, PromptTypeOptions } from "../../types/IAI";
+import AIInformation from "./components/AIInformation/AIInformation";
+import "./AIPage.css";
+type PickerType = "time" | "date";
 
 // type FieldType = {
 //     timeType: string;
@@ -23,17 +23,17 @@ type PickerType = 'time' | 'date';
 //     time: string;
 // };
 
-const DEFAULT_PROMPT = 'Please summarize below text in 1-2 sentences.';
+const DEFAULT_PROMPT = "Please summarize below text in 1-2 sentences.";
 
 const PickerWithType = ({
     type,
     onChange,
 }: {
     type: PickerType;
-    onChange: TimePickerProps['onChange'] | DatePickerProps['onChange'];
+    onChange: TimePickerProps["onChange"] | DatePickerProps["onChange"];
 }) => {
-    if (type === 'time') return <TimePicker onChange={onChange} />;
-    if (type === 'date') return <DatePicker onChange={onChange} />;
+    if (type === "time") return <TimePicker onChange={onChange} />;
+    if (type === "date") return <DatePicker onChange={onChange} />;
     return <DatePicker picker={type} onChange={onChange} />;
 };
 
@@ -51,7 +51,7 @@ const AIPage = () => {
     const onTimeTabChange = (
         activeKey: (typeof AITypeOptions)[keyof typeof AITypeOptions]
     ) => {
-        form.setFieldValue('timeType', activeKey);
+        form.setFieldValue("timeType", activeKey);
         setTimeActiveTab(activeKey);
     };
 
@@ -59,7 +59,7 @@ const AIPage = () => {
         activeKey: (typeof PromptTypeOptions)[keyof typeof PromptTypeOptions]
     ) => {
         if (activeKey === PromptTypeOptions.default) {
-            form.setFieldValue('prompt', DEFAULT_PROMPT);
+            form.setFieldValue("prompt", DEFAULT_PROMPT);
         }
         setPromptActiveTab(activeKey);
     };
@@ -70,13 +70,13 @@ const AIPage = () => {
         isSuccess: isSuccessFetchAIsData,
         isError: isErrorFetchAIsData,
     } = useQuery({
-        queryKey: ['fetchAIs', page],
+        queryKey: ["fetchAIs", page],
         queryFn: () => fetchAIs({ page, pageSize }),
         placeholderData: keepPreviousData,
     });
 
     const { mutate: mutationCreateAI } = useMutation({
-        mutationKey: ['createAI'],
+        mutationKey: ["createAI"],
         mutationFn: createAI,
         onSuccess: (data) => {
             handleCancelAddAIModal();
@@ -115,16 +115,27 @@ const AIPage = () => {
 
     return (
         <>
-            <Flex gap="large" vertical>
+            <Flex
+                gap="large"
+                vertical
+                justify="space-between"
+                style={{ marginBottom: 20 }}
+            >
                 <Flex justify="space-between" align="center">
-                    <span style={{ fontSize: 24, fontWeight: 600 }}>
+                    <span
+                        style={{ fontSize: 24, fontWeight: 400, fontFamily: "Staatliches" }}
+                    >
                         #AI MODEL
                     </span>
 
-                    <Button
-                        className="add-ai-btn"
-                        onClick={handleOpenAddAIModal}
-                    >
+                    <Button className="add-ai-btn"
+                        style={{
+                            fontFamily: "Staatliches",
+                            fontSize: 16,
+                            fontWeight: 400,
+                            color: "#ffffff",
+                        }}
+                        onClick={handleOpenAddAIModal}>
                         ADD
                     </Button>
                 </Flex>
@@ -146,14 +157,8 @@ const AIPage = () => {
                                 defaultActiveKey={AITypeOptions.realtime}
                                 onChange={onTimeTabChange}
                             >
-                                <TabPane
-                                    tab="Realtime"
-                                    key={AITypeOptions.realtime}
-                                />
-                                <TabPane
-                                    tab="Scheduled"
-                                    key={AITypeOptions.scheduled}
-                                />
+                                <TabPane tab="Realtime" key={AITypeOptions.realtime} />
+                                <TabPane tab="Scheduled" key={AITypeOptions.scheduled} />
                             </Tabs>
 
                             <Form.Item
@@ -168,10 +173,8 @@ const AIPage = () => {
                                     label="Scheduled Time"
                                     rules={[
                                         {
-                                            required:
-                                                timeActiveTab ===
-                                                AITypeOptions.scheduled,
-                                            message: 'Time is required',
+                                            required: timeActiveTab === AITypeOptions.scheduled,
+                                            message: "Time is required",
                                         },
                                     ]}
                                 >
@@ -186,18 +189,9 @@ const AIPage = () => {
                                 </Form.Item>
                             )}
 
-                            <Tabs
-                                defaultActiveKey="default"
-                                onChange={onPromptTabChange}
-                            >
-                                <TabPane
-                                    tab="Default Prompt"
-                                    key={PromptTypeOptions.default}
-                                />
-                                <TabPane
-                                    tab="Custom Prompt"
-                                    key={PromptTypeOptions.custom}
-                                />
+                            <Tabs defaultActiveKey="default" onChange={onPromptTabChange}>
+                                <TabPane tab="Default Prompt" key={PromptTypeOptions.default} />
+                                <TabPane tab="Custom Prompt" key={PromptTypeOptions.custom} />
                             </Tabs>
 
                             {promptActiveTab === PromptTypeOptions.default && (
@@ -208,8 +202,7 @@ const AIPage = () => {
                                 >
                                     <Select className="input-add-ai">
                                         <Select.Option value={DEFAULT_PROMPT}>
-                                            Please summarize below text in 1-2
-                                            sentences.
+                                            Please summarize below text in 1-2 sentences.
                                         </Select.Option>
                                     </Select>
                                 </Form.Item>
@@ -221,11 +214,8 @@ const AIPage = () => {
                                     label="Prompt"
                                     rules={[
                                         {
-                                            required:
-                                                promptActiveTab ===
-                                                PromptTypeOptions.custom,
-                                            message:
-                                                'Custom prompt is required',
+                                            required: promptActiveTab === PromptTypeOptions.custom,
+                                            message: "Custom prompt is required",
                                         },
                                     ]}
                                 >

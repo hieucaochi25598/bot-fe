@@ -51,6 +51,7 @@ export const BotChatTable: React.FC<BotChatTablePropsTypes> = ({
         //     rowKey="_id"
         // />
         <CustomTable
+            onRow
             columns={columns}
             dataSource={botChats}
             rowKey="_id"

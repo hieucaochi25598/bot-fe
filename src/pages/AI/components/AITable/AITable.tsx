@@ -3,7 +3,7 @@ import { Table } from 'antd';
 import { useAIColumns } from './columns';
 import { RootState } from '../../../../app/store/store';
 import { useSelector, useDispatch } from 'react-redux';
-import { setPage } from '../../../../features/channel/channelSlice';
+import { setPage } from '../../../../features/ai/aiSlice';
 import { setAI } from '../../../../features/ai/aiSlice';
 import './AITable.css';
 
@@ -15,7 +15,7 @@ export const AITable: React.FC<AITablePropsTypes> = ({
     isLoading,
 }: AITablePropsTypes) => {
     const { columns } = useAIColumns();
-    const { ais, aiInformation, total, pageSize } = useSelector(
+    const { ais, aiInformation, total, pageSize, page } = useSelector(
         (state: RootState) => state.ai
     );
     const dispatch = useDispatch();
@@ -37,6 +37,7 @@ export const AITable: React.FC<AITablePropsTypes> = ({
             loading={isLoading}
             columns={columns}
             pagination={{
+                current: page,
                 total,
                 pageSize,
                 onChange: (page) => {

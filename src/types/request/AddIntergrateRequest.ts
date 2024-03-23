@@ -1,5 +1,9 @@
 export interface AddIntergrateRequest {
-    aiId: string;
     channelId: string;
-    botIds: string[];
+    aiId: string;
+}
+
+export interface AddIntergrateAIWithBotRequest {
+    aiId: string;
+    botId: string;
 }

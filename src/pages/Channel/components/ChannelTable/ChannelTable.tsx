@@ -13,7 +13,7 @@ export const ChannelTable: React.FC<ChannelTablePropsTypes> = ({
     isLoading,
 }: ChannelTablePropsTypes) => {
     const { columns } = useChannelColumns();
-    const { channels, total, pageSize } = useSelector(
+    const { channels, total, pageSize, page } = useSelector(
         (state: RootState) => state.channel
     );
     const dispatch = useDispatch();
@@ -23,6 +23,7 @@ export const ChannelTable: React.FC<ChannelTablePropsTypes> = ({
             loading={isLoading}
             columns={columns}
             pagination={{
+                current: page,
                 total,
                 pageSize,
                 onChange: (page) => {

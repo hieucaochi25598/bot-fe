@@ -89,7 +89,7 @@ const AIPage = () => {
             dispatch(setAIs(AIsData.items));
             dispatch(setTotal(AIsData.totalCount));
         }
-    }, [isSuccessFetchAIsData, AIsData]);
+    }, [isSuccessFetchAIsData, AIsData, dispatch]);
 
     useEffect(() => {
         if (isErrorFetchAIsData) {

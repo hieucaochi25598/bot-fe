@@ -17,7 +17,7 @@ export const BotChatTable: React.FC<BotChatTablePropsTypes> = ({
     isLoading,
 }: BotChatTablePropsTypes) => {
     const { columns } = useBotChatColumns();
-    const { botChats, total, pageSize, botChatInformation } = useSelector(
+    const { botChats, total, pageSize, botChatInformation, page } = useSelector(
         (state: RootState) => state.botChat
     );
     const dispatch = useDispatch();
@@ -39,6 +39,7 @@ export const BotChatTable: React.FC<BotChatTablePropsTypes> = ({
             loading={isLoading}
             columns={columns}
             pagination={{
+                current: page,
                 total,
                 pageSize,
                 onChange: (page) => {

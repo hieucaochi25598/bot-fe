@@ -20,7 +20,7 @@ const RootLayout: React.FC = () => {
         } else {
             dispatch(setMenuKey(location.pathname));
         }
-    }, [navigate]);
+    }, [navigate, dispatch, setMenuKey, location]);
 
     return (
         <div

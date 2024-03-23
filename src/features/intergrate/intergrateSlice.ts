@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { IIntergrate } from '../../types/IIntergrate';
+import { IIntergrate, IIntergrateAIWithBot } from '../../types/IIntergrate';
 
 export interface IntergrateState {
     intergrates: IIntergrate[];
+    intergratesAIWithBot: IIntergrateAIWithBot[];
     page: number;
     pageSize: number;
     total: number;
@@ -11,6 +12,7 @@ export interface IntergrateState {
 
 const initialState: IntergrateState = {
     intergrates: [],
+    intergratesAIWithBot: [],
     page: 1,
     pageSize: 10,
     total: 0,
@@ -22,6 +24,13 @@ export const intergrateSlice = createSlice({
     reducers: {
         setIntergrates: (state, action: PayloadAction<IIntergrate[]>) => {
             state.intergrates = action.payload;
+        },
+
+        setIntergratesAIWithBot: (
+            state,
+            action: PayloadAction<IIntergrateAIWithBot[]>
+        ) => {
+            state.intergratesAIWithBot = action.payload;
         },
 
         addIntergrate: (state, action: PayloadAction<IIntergrate>) => {
@@ -40,7 +49,12 @@ export const intergrateSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setIntergrates, addIntergrate, setPage, setTotal } =
-    intergrateSlice.actions;
+export const {
+    setIntergrates,
+    setIntergratesAIWithBot,
+    addIntergrate,
+    setPage,
+    setTotal,
+} = intergrateSlice.actions;
 
 export default intergrateSlice.reducer;

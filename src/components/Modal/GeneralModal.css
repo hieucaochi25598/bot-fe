@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Staatliches';
+    src: url('../../assets/Staatliches-Regular.ttf') format('truetype');
+}
+
 .ant-modal-footer {
     display: flex;
     flex-direction: row-reverse;
@@ -11,6 +16,7 @@
     height: unset;
     padding: 10px 20px;
     font-weight: 500;
+    font-family: 'Staatliches';
 }
 
 .cancel-btn-modal {
@@ -20,4 +26,5 @@
     height: unset;
     padding: 10px 20px;
     font-weight: 500;
+    font-family: 'Staatliches';
 }

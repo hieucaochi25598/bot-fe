@@ -131,16 +131,17 @@ const BotChatPage = () => {
             layout="vertical"
           >
             <Form.Item<FieldType>
-              label="Token"
-              name="token"
+              label="Name"
+              name="name"
               rules={[
                 {
                   required: true,
-                  message: "Please input token",
+                  message: "Please input name",
                 },
               ]}
+              labelCol={{ style: { fontFamily: "Staatliches" } }}
             >
-              <Input placeholder="Token" className="input-add-bot" />
+              <Input placeholder="Name" className="input-add-bot" />
             </Form.Item>
             <Form.Item<FieldType>
               label="Chat ID"
@@ -151,10 +152,23 @@ const BotChatPage = () => {
                   message: "Please input chat ID",
                 },
               ]}
+              labelCol={{ style: { fontFamily: "Staatliches" } }}
             >
               <Input placeholder="Chat ID" className="input-add-bot" />
             </Form.Item>
-
+            <Form.Item<FieldType>
+              label="Token"
+              name="token"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input token",
+                },
+              ]}
+              labelCol={{ style: { fontFamily: "Staatliches" } }}
+            >
+              <Input placeholder="Token" className="input-add-bot" />
+            </Form.Item>
             <Form.Item<FieldType>
               label="Type"
               name="type"
@@ -164,20 +178,9 @@ const BotChatPage = () => {
                   message: "Please input type",
                 },
               ]}
+              labelCol={{ style: { fontFamily: "Staatliches" } }}
             >
               <Input placeholder="Type" className="input-add-bot" />
-            </Form.Item>
-            <Form.Item<FieldType>
-              label="Name"
-              name="name"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input name",
-                },
-              ]}
-            >
-              <Input placeholder="Name" className="input-add-bot" />
             </Form.Item>
           </Form>
         </div>

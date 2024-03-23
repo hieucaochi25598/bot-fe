@@ -30,10 +30,10 @@
 .ant-btn.add-ai-btn {
     border-radius: 10px;
     background-color: #272833;
-    color: #ffffff;
     font-weight: 600;
     padding: 10px 60px;
     height: unset;
+    border: 1.5px solid #272833;
 }
 
 .ai-information-icon {

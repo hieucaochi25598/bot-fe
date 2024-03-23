@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Staatliches';
+    src: url('../../assets/Staatliches-Regular.ttf') format('truetype');
+}
+
 .bot-information-container {
     background-color: #f2fed1;
     padding: 30px 0;
@@ -6,18 +11,21 @@
     padding: 25px;
     box-shadow: 0px 5px 0px 0px #191a23;
     margin-bottom: 20px;
+    font-family: 'Staatliches';
+    font-weight: 400;
+    font-size: 16px;
 }
 
 .bot-information {
-    width: 70%;
+    width: 50%;
+    margin: 0 auto;
 }
 
 .bot-information-name {
-    font-size: 20px;
+    font-size: 16px;
     border-radius: 10px;
     background-color: #cdced9;
     border: 1px solid #000000;
-    font-weight: 600;
     padding: 10px;
 }
 
@@ -26,7 +34,8 @@
 .bot-information-type {
     border-bottom: 1px solid #000000;
     padding: 10px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 400;
 }
 
 .ant-btn.add-bot-btn {

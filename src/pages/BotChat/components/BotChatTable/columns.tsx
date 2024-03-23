@@ -9,7 +9,7 @@ export const useBotChatColumns = () => {
         {
             title: 'Token',
             dataIndex: 'token',
-            width: 400,
+            width: 200,
             key: 'token',
         },
         {

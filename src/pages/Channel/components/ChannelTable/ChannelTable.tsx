@@ -31,7 +31,6 @@ export const ChannelTable: React.FC<ChannelTablePropsTypes> = ({
                 },
             }}
             dataSource={channels}
-            scroll={{ x: 2000 }}
             rowKey="_id"
         />
     );

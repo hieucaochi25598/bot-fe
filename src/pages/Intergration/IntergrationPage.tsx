@@ -34,6 +34,7 @@ import {
     AddIntergrateAIWithBotRequest,
     AddIntergrateRequest,
 } from '../../types/request/AddIntergrateRequest';
+import { notification } from 'antd';
 
 const IntergrationPage = () => {
     const [nodes, setNodes, onNodesChange] = useNodesState([]);
@@ -45,6 +46,7 @@ const IntergrationPage = () => {
         (state: RootState) => state.intergrate
     );
     const dispatch = useDispatch();
+    const [api, contextHolder] = notification.useNotification();
 
     const nodeTypes = useMemo(
         () => ({
@@ -100,6 +102,10 @@ const IntergrationPage = () => {
         mutationFn: createIntergrate,
         onSuccess: () => {
             refetchIntergrates();
+            api.success({
+                message: 'Success',
+                description: 'Intergrate added successfully',
+            });
         },
     });
 
@@ -108,6 +114,10 @@ const IntergrationPage = () => {
         mutationFn: createIntergrateAIWithBot,
         onSuccess: () => {
             refetchIntergratesAIWithBot();
+            api.success({
+                message: 'Success',
+                description: 'Intergrate AI with Bot added successfully',
+            });
         },
     });
 
@@ -244,6 +254,7 @@ const IntergrationPage = () => {
 
     return (
         <>
+            {contextHolder}
             <ReactFlow
                 nodes={nodes}
                 nodeTypes={nodeTypes}

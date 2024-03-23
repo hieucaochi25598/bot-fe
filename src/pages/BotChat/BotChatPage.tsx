@@ -1,4 +1,4 @@
-import { Button, Flex } from "antd";
+import { Button, Flex, notification } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { keepPreviousData, useMutation, useQuery } from "@tanstack/react-query";
@@ -27,6 +27,7 @@ const BotChatPage = () => {
   const [form] = Form.useForm();
   const { page, pageSize } = useSelector((state: RootState) => state.botChat);
   const dispatch = useDispatch();
+  const [api, contextHolder] = notification.useNotification();
 
   const {
     data: botChatsData,
@@ -44,7 +45,17 @@ const BotChatPage = () => {
     onSuccess: (data) => {
       handleCancelAddBotChatModal();
       dispatch(addBotchat(data.bot));
+      api.success({
+        message: "Success",
+        description: "Bot chat added successfully",
+      });
     },
+    onError: (error) => {
+      api.error({
+        message: "Error",
+        description: error.message,
+      });
+    }
   });
 
   useEffect(() => {
@@ -64,8 +75,16 @@ const BotChatPage = () => {
     setIsOpenAddBotChatModal(true);
   };
 
-  const handleOkClickAddBotChatModal = () => {
-    form.submit();
+  const handleOkClickAddBotChatModal = async () => {
+    try {
+      await form.validateFields();
+      form.submit();
+    } catch (error) {
+      api.error({
+        message: "Error",
+        description: "Please fill in all required fields",
+      });
+    }
   };
 
   const handleCancelAddBotChatModal = () => {
@@ -74,11 +93,12 @@ const BotChatPage = () => {
   };
 
   const onSubmitAddChatBotForm = (formData: AddBotChatFormData) => {
-    mutationCreateBotChat(formData);
+     mutationCreateBotChat(formData);
   };
 
   return (
     <>
+      {contextHolder}
       <Flex
         align="center"
         justify="space-between"

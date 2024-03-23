@@ -4,3 +4,24 @@ body {
     margin: 0;
     padding: 0;
 }
+
+@font-face {
+    font-family: 'Staatliches';
+    src: url('../src/assets/Staatliches-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.ant-notification-notice-success {
+  background-color: #f2fed1;
+  color: white;
+}
+
+.ant-notification-notice-error {
+  background-color: white;
+  color: #f44336;
+}
+
+.ant-notification-notice {
+  font-family: 'Staatliches', cursive;
+}

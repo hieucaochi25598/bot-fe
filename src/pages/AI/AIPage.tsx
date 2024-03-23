@@ -1,6 +1,6 @@
 import AITable from "./components/AITable/AITable";
 import type { DatePickerProps, TimePickerProps } from "antd";
-import { Button, DatePicker, Flex, Select, Tabs, TimePicker } from "antd";
+import { Button, DatePicker, Flex, Select, Tabs, TimePicker, notification } from "antd";
 import { createAI, fetchAIs } from "../../apis/ai";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -16,12 +16,6 @@ import { AITypeOptions, PromptTypeOptions } from "../../types/IAI";
 import AIInformation from "./components/AIInformation/AIInformation";
 import "./AIPage.css";
 type PickerType = "time" | "date";
-
-// type FieldType = {
-//     timeType: string;
-//     prompt: string;
-//     time: string;
-// };
 
 const DEFAULT_PROMPT = "Please summarize below text in 1-2 sentences.";
 
@@ -43,6 +37,8 @@ const AIPage = () => {
     const [form] = Form.useForm();
     const { page, pageSize } = useSelector((state: RootState) => state.ai);
     const dispatch = useDispatch();
+    const [api, contextHolder] = notification.useNotification();
+
     const [timeActiveTab, setTimeActiveTab] = useState(AITypeOptions.realtime);
     const [promptActiveTab, setPromptActiveTab] = useState(
         PromptTypeOptions.default
@@ -81,6 +77,16 @@ const AIPage = () => {
         onSuccess: (data) => {
             handleCancelAddAIModal();
             dispatch(addAI(data.AIModel));
+            api.success({
+                message: "Success",
+                description: "AI added successfully",
+            });
+        },
+        onError: (error) => {
+            api.error({
+                message: "Error",
+                description: error.message,
+            });
         },
     });
 
@@ -115,6 +121,7 @@ const AIPage = () => {
 
     return (
         <>
+            {contextHolder}
             <Flex
                 gap="large"
                 vertical

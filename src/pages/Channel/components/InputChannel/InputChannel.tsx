@@ -1,6 +1,6 @@
 import { CheckOutlined, SyncOutlined } from '@ant-design/icons';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { Button, Flex } from 'antd';
+import { Button, Flex, notification } from 'antd';
 import { Form, Input } from 'antd';
 import { useState, useEffect } from 'react';
 import {
@@ -26,6 +26,7 @@ const InputChannel = () => {
     const [inputChannelId, setInputChannelId] = useState<string>();
     const { channel } = useSelector((state: RootState) => state.channel);
     const dispatch = useDispatch();
+    const [api, contextHolder] = notification.useNotification();
 
     const {
         data: channelData,
@@ -44,6 +45,16 @@ const InputChannel = () => {
         mutationFn: createChannel,
         onSuccess: (data) => {
             dispatch(addChannel(data.channel));
+            api.success({
+                message: 'Success',
+                description: 'Channel added successfully',
+            });
+        },
+        onError: (error) => {
+            api.error({
+                message: 'Error',
+                description: error.message,
+            });
         },
     });
 
@@ -93,6 +104,7 @@ const InputChannel = () => {
 
     return (
         <div className="channel-input-container">
+            {contextHolder}
             <div className="channel-input-url">
                 <Flex gap="middle">
                     <Form

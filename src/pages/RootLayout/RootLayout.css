@@ -9,6 +9,16 @@
         format('truetype');
 }
 
+@font-face {
+    font-family: 'Staatliches';
+    src: url('../../assets/Staatliches-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Contrail One';
+    src: url('../../assets/ContrailOne-Regular.ttf') format('truetype');
+}
+
 .menu {
     width: 122px;
     height: 48px;

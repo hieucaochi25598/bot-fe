@@ -1,5 +1,4 @@
 import React from 'react';
-import { Table } from 'antd';
 import { useBotChatColumns } from './columns';
 import { RootState } from '../../../../app/store/store';
 import { useSelector, useDispatch } from 'react-redux';
@@ -24,45 +23,31 @@ export const BotChatTable: React.FC<BotChatTablePropsTypes> = ({
     const dispatch = useDispatch();
 
     return (
-        // <Table
-        //     onRow={(record, rowIndex) => {
-        //         return {
-        //             onClick: (event) => {
-        //                 dispatch(setBotChatInformation(record));
-        //             },
-        //         };
-        //     }}
-        //     rowClassName={(record, index) => {
-        //         return record._id === botChatInformation._id
-        //             ? 'common-row-active'
-        //             : 'common-row';
-        //     }}
-        //     loading={isLoading}
-        //     columns={columns}
-        //     pagination={{
-        //         total,
-        //         pageSize,
-        //         onChange: (page) => {
-        //             dispatch(setPage(page));
-        //         },
-        //     }}
-        //     dataSource={botChats}
-        //     scroll={{ x: 2000 }}
-        //     rowKey="_id"
-        // />
         <CustomTable
-            columns={columns}
-            dataSource={botChats}
-            rowKey="_id"
+            onRow={(record) => {
+                return {
+                    onClick: () => {
+                        dispatch(setBotChatInformation(record));
+                    },
+                };
+            }}
+            rowClassName={(record) => {
+                return record._id === botChatInformation._id
+                    ? 'common-row-active'
+                    : 'common-row';
+            }}
             loading={isLoading}
+            columns={columns}
             pagination={{
                 current: page,
                 total,
                 pageSize,
-                onChange: (page: number) => {
+                onChange: (page) => {
                     dispatch(setPage(page));
                 },
             }}
+            dataSource={botChats}
+            rowKey="_id"
         />
     );
 };

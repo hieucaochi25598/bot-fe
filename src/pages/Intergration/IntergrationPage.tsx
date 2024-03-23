@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useCallback, useEffect, useMemo } from 'react';
-import ReactFlow, { useNodesState, useEdgesState, addEdge } from 'reactflow';
+import ReactFlow, { useNodesState, useEdgesState } from 'reactflow';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { fetchChannels } from '../../apis/channel';
@@ -26,7 +26,6 @@ import {
     fetchIntergratesAIWithBot,
 } from '../../apis/intergrate';
 import {
-    addIntergrate,
     setIntergrates,
     setIntergratesAIWithBot,
 } from '../../features/intergrate/intergrateSlice';
@@ -99,7 +98,7 @@ const IntergrationPage = () => {
     const { mutate: mutationCreateIntergrate } = useMutation({
         mutationKey: ['createIntergrate'],
         mutationFn: createIntergrate,
-        onSuccess: (data) => {
+        onSuccess: () => {
             refetchIntergrates();
         },
     });
@@ -107,7 +106,7 @@ const IntergrationPage = () => {
     const { mutate: mutationCreateIntergrateAIWithBot } = useMutation({
         mutationKey: ['createIntergrateAIWithBot'],
         mutationFn: createIntergrateAIWithBot,
-        onSuccess: (data) => {
+        onSuccess: () => {
             refetchIntergratesAIWithBot();
         },
     });

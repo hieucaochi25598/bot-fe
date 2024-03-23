@@ -41,3 +41,8 @@
     border-radius: 8px;
     padding-bottom: 0;
 }
+
+.ant-btn.add-ai-btn:hover {
+    background-color: #f2fed1 !important;
+    color: #272833 !important;
+}

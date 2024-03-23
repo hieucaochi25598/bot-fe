@@ -119,7 +119,6 @@ const AIPage = () => {
                 gap="large"
                 vertical
                 justify="space-between"
-                style={{ marginBottom: 20 }}
             >
                 <Flex justify="space-between" align="center">
                     <span

@@ -8,6 +8,7 @@
     gap: 20px;
     border: 1px solid #272833;
     flex-direction: column;
+    font-family: 'Contrail One';
 }
 .custom-node-channel {
     background-color: rgb(171, 246, 0);

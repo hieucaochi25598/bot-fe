@@ -1,15 +1,14 @@
 import type { TableProps } from 'antd';
-import { useFormattedDate } from '../../../../hooks/useFormattedDate';
+// import { useFormattedDate } from '../../../../hooks/useFormattedDate';
 import { IBotchat } from '../../../../types/IBotChat';
 
 export const useBotChatColumns = () => {
-    const { formattedDate } = useFormattedDate();
+    // const { formattedDate } = useFormattedDate();
 
     const columns: TableProps<IBotchat>['columns'] = [
         {
             title: 'Token',
             dataIndex: 'token',
-            width: 200,
             key: 'token',
         },
         {
@@ -27,18 +26,18 @@ export const useBotChatColumns = () => {
             dataIndex: 'name',
             key: 'name',
         },
-        {
-            title: 'Created At',
-            dataIndex: 'createdAt',
-            key: 'createdAt',
-            render: (_, record) => formattedDate(record.createdAt),
-        },
-        {
-            title: 'Updated At',
-            dataIndex: 'updatedAt',
-            key: 'updatedAt',
-            render: (_, record) => formattedDate(record.updatedAt),
-        },
+        // {
+        //     title: 'Created At',
+        //     dataIndex: 'createdAt',
+        //     key: 'createdAt',
+        //     render: (_, record) => formattedDate(record.createdAt),
+        // },
+        // {
+        //     title: 'Updated At',
+        //     dataIndex: 'updatedAt',
+        //     key: 'updatedAt',
+        //     render: (_, record) => formattedDate(record.updatedAt),
+        // },
     ];
 
     return {

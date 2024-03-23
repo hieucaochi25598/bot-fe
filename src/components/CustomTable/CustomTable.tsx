@@ -1,33 +1,14 @@
-import { Table } from 'antd';
+import { Table, TableProps } from 'antd';
 import './CustomTable.css';
 
-export interface CustomTableProps<T> {
-    columns: any;
-    dataSource: T[];
-    title?: string;
-    style?: React.CSSProperties;
-    rowKey: string;
-    loading?: boolean;
-    pagination?: any;
-    scroll?: any;
-}
+interface CustomTableProps extends TableProps {}
 
-const CustomTable = <T extends object>(props: CustomTableProps<T>) => {
-  return (
-    <div className="custom-table-container">
-      <div className="custom-table-title">{props.title}</div>
-      <Table
-        columns={props.columns}
-        dataSource={props.dataSource}
-        rowKey={props.rowKey}
-        loading={props.loading}
-        pagination={props.pagination}
-        scroll={props.scroll}
-        className='custom-table'
-        rowClassName='custom-table-row'
-      />
-    </div>
-  );
+const CustomTable = ({ ...props }: CustomTableProps) => {
+    return (
+        <div className="custom-table-container">
+            <Table {...props} />
+        </div>
+    );
 };
 
 export default CustomTable;

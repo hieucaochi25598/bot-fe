@@ -100,7 +100,7 @@ const RootLayout: React.FC = () => {
                 </div>
                 <div
                     style={{
-                        height: '70vh',
+                        height: '72vh',
                         backgroundColor: '#ffffff',
                         borderRadius: 24,
                         border: '2px solid #272833',

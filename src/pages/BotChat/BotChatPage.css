@@ -3,11 +3,6 @@
     overflow: hidden;
 }
 
-@font-face {
-    font-family: 'Staatliches';
-    src: url('../../assets/Staatliches-Regular.ttf') format('truetype');
-}
-
 .ant-btn.add-bot-btn {
     border-radius: 10px;
     background-color: #272833;

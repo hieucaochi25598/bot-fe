@@ -23,7 +23,7 @@ type FieldType = {
 
 const InputChannel = () => {
     const [form] = Form.useForm();
-    const [inputChannelId, setInpuChannelId] = useState<string>();
+    const [inputChannelId, setInputChannelId] = useState<string>();
     const { channel } = useSelector((state: RootState) => state.channel);
     const dispatch = useDispatch();
 
@@ -77,7 +77,7 @@ const InputChannel = () => {
 
         if (match) {
             const lastPortion = match[1];
-            setInpuChannelId(lastPortion);
+            setInputChannelId(lastPortion);
         } else {
         }
     };

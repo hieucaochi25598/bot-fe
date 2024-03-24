@@ -1,40 +1,40 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { useCallback, useEffect, useMemo } from 'react';
-import ReactFlow, { useNodesState, useEdgesState } from 'reactflow';
-import { useSelector, useDispatch } from 'react-redux';
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useCallback, useEffect, useMemo } from "react";
+import ReactFlow, { useNodesState, useEdgesState } from "reactflow";
+import { useSelector, useDispatch } from "react-redux";
 
-import { fetchChannels } from '../../apis/channel';
-import { setChannels } from '../../features/channel/channelSlice';
+import { fetchChannels } from "../../apis/channel";
+import { setChannels } from "../../features/channel/channelSlice";
 import {
     buildInitialNodesAI,
     buildInitialNodesBotChat,
     buildInitialNodesChannel,
-} from '../../utils/intergrate';
-import { RootState } from '../../app/store/store';
-import CustomChannelNode from '../../components/CustomNode/CustomChannelNode';
-import { fetchBotChats } from '../../apis/botchat';
-import { setBotchats } from '../../features/botchat/botChatSlice';
-import CustomBotChatNode from '../../components/CustomNode/CustomBotChatNode';
-import CustomAINode from '../../components/CustomNode/CustomAINode';
-import { fetchAIs } from '../../apis/ai';
-import { setAIs } from '../../features/ai/aiSlice';
-import 'reactflow/dist/style.css';
+} from "../../utils/intergrate";
+import { RootState } from "../../app/store/store";
+import CustomChannelNode from "../../components/CustomNode/CustomChannelNode";
+import { fetchBotChats } from "../../apis/botchat";
+import { setBotchats } from "../../features/botchat/botChatSlice";
+import CustomBotChatNode from "../../components/CustomNode/CustomBotChatNode";
+import CustomAINode from "../../components/CustomNode/CustomAINode";
+import { fetchAIs } from "../../apis/ai";
+import { setAIs } from "../../features/ai/aiSlice";
+import "reactflow/dist/style.css";
 import {
     createIntergrate,
     createIntergrateAIWithBot,
     fetchIntergrates,
     fetchIntergratesAIWithBot,
-} from '../../apis/intergrate';
+} from "../../apis/intergrate";
 import {
     setIntergrates,
     setIntergratesAIWithBot,
-} from '../../features/intergrate/intergrateSlice';
-import './IntergrationPage.css';
+} from "../../features/intergrate/intergrateSlice";
+import "./IntergrationPage.css";
 import {
     AddIntergrateAIWithBotRequest,
     AddIntergrateRequest,
-} from '../../types/request/AddIntergrateRequest';
-import { notification } from 'antd';
+} from "../../types/request/AddIntergrateRequest";
+import { notification } from "antd";
 
 const IntergrationPage = () => {
     const [nodes, setNodes, onNodesChange] = useNodesState([]);
@@ -62,7 +62,7 @@ const IntergrationPage = () => {
         isSuccess: isSuccessFetchIntergratesData,
         refetch: refetchIntergrates,
     } = useQuery({
-        queryKey: ['fetchAllIntergrates'],
+        queryKey: ["fetchAllIntergrates"],
         queryFn: () => fetchIntergrates(),
         refetchOnWindowFocus: false,
     });
@@ -72,51 +72,55 @@ const IntergrationPage = () => {
         isSuccess: isSuccessFetchIntergratesAIWithBotData,
         refetch: refetchIntergratesAIWithBot,
     } = useQuery({
-        queryKey: ['fetchAllIntergratesAIWithBot'],
+        queryKey: ["fetchAllIntergratesAIWithBot"],
         queryFn: () => fetchIntergratesAIWithBot(),
         refetchOnWindowFocus: false,
     });
 
     const { data: channelsData, isSuccess: isSuccessFetchChannelsData } =
         useQuery({
-            queryKey: ['fetchAllChannels'],
+            queryKey: ["fetchAllChannels"],
             queryFn: () => fetchChannels(),
             refetchOnWindowFocus: false,
         });
 
     const { data: botChatsData, isSuccess: isSuccessFetchBotChatsData } =
         useQuery({
-            queryKey: ['fetchAllBotChats'],
+            queryKey: ["fetchAllBotChats"],
             queryFn: () => fetchBotChats(),
             refetchOnWindowFocus: false,
         });
 
     const { data: aisData, isSuccess: isSuccessFetchAIsData } = useQuery({
-        queryKey: ['fetchAllAIs'],
+        queryKey: ["fetchAllAIs"],
         queryFn: () => fetchAIs(),
         refetchOnWindowFocus: false,
     });
 
     const { mutate: mutationCreateIntergrate } = useMutation({
-        mutationKey: ['createIntergrate'],
+        mutationKey: ["createIntergrate"],
         mutationFn: createIntergrate,
         onSuccess: () => {
             refetchIntergrates();
-            api.success({
-                message: 'Success',
-                description: 'Intergrate added successfully',
+        },
+        onError: (error) => {
+            api.error({
+                message: "Error",
+                description: error.message,
             });
         },
     });
 
     const { mutate: mutationCreateIntergrateAIWithBot } = useMutation({
-        mutationKey: ['createIntergrateAIWithBot'],
+        mutationKey: ["createIntergrateAIWithBot"],
         mutationFn: createIntergrateAIWithBot,
         onSuccess: () => {
             refetchIntergratesAIWithBot();
-            api.success({
-                message: 'Success',
-                description: 'Intergrate AI with Bot added successfully',
+        },
+        onError: (error) => {
+            api.error({
+                message: "Error",
+                description: error.message,
             });
         },
     });
@@ -164,13 +168,13 @@ const IntergrationPage = () => {
     useEffect(() => {
         const initialNodesChannel = buildInitialNodesChannel(
             channels,
-            'channelNode'
+            "channelNode"
         );
         const initialNodesBotChat = buildInitialNodesBotChat(
             botChats,
-            'botChatNode'
+            "botChatNode"
         );
-        const initialNodesAI = buildInitialNodesAI(ais, 'aiNode');
+        const initialNodesAI = buildInitialNodesAI(ais, "aiNode");
 
         setNodes([
             ...initialNodesChannel,
@@ -235,13 +239,11 @@ const IntergrationPage = () => {
                 mutationCreateIntergrate(createIntergrateRequest);
             } else {
                 const createIntergrateAIWithBotRequest: AddIntergrateAIWithBotRequest =
-                    {
-                        aiId: source,
-                        botId: target,
-                    };
-                mutationCreateIntergrateAIWithBot(
-                    createIntergrateAIWithBotRequest
-                );
+                {
+                    aiId: source,
+                    botId: target,
+                };
+                mutationCreateIntergrateAIWithBot(createIntergrateAIWithBotRequest);
             }
         },
         [

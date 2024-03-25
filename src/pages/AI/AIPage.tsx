@@ -158,6 +158,7 @@ const AIPage = () => {
                         <Button className="title-add-ai-modal">NEW AI</Button>
                     </div>
                     <div className="add-ai-modal-content-container">
+                        <div className="type-title">#Type</div>
                         <Form form={form} onFinish={onSubmitAddAIForm}>
                             <Tabs
                                 defaultActiveKey={AITypeOptions.realtime}

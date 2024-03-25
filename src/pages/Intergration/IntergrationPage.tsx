@@ -239,19 +239,44 @@ const IntergrationPage = () => {
                 mutationCreateIntergrate(createIntergrateRequest);
             } else {
                 const createIntergrateAIWithBotRequest: AddIntergrateAIWithBotRequest =
-                {
-                    aiId: source,
-                    botId: target,
-                };
-                mutationCreateIntergrateAIWithBot(createIntergrateAIWithBotRequest);
+                    {
+                        aiId: source,
+                        botId: target,
+                    };
+                mutationCreateIntergrateAIWithBot(
+                    createIntergrateAIWithBotRequest
+                );
             }
         },
-        [
-            setEdges,
-            channels,
-            mutationCreateIntergrate,
-            mutationCreateIntergrateAIWithBot,
-        ]
+        [channels, mutationCreateIntergrate, mutationCreateIntergrateAIWithBot]
+    );
+
+    const onEdgesDelete = useCallback(
+        (params: any) => {
+            const { source, target } = params[0];
+            const channel = channels.find((c) => c._id === source);
+
+            if (channel) {
+                const createIntergrateRequest: AddIntergrateRequest = {
+                    channelId: source,
+                    aiId: target,
+                    isDeleted: true,
+                };
+
+                mutationCreateIntergrate(createIntergrateRequest);
+            } else {
+                const createIntergrateAIWithBotRequest: AddIntergrateAIWithBotRequest =
+                    {
+                        aiId: source,
+                        botId: target,
+                        isDeleted: true,
+                    };
+                mutationCreateIntergrateAIWithBot(
+                    createIntergrateAIWithBotRequest
+                );
+            }
+        },
+        [channels, mutationCreateIntergrate, mutationCreateIntergrateAIWithBot]
     );
 
     return (
@@ -264,6 +289,7 @@ const IntergrationPage = () => {
                 onNodesChange={onNodesChange}
                 onEdgesChange={onEdgesChange}
                 onConnect={onConnect}
+                onEdgesDelete={onEdgesDelete}
                 defaultViewport={{ x: 0, y: 0, zoom: 0.8 }}
             />
         </>

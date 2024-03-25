@@ -118,6 +118,7 @@ const InputChannel = () => {
                             <Input
                                 className="input-url-channelId"
                                 placeholder="DISCORD URL / CHANNEL ID"
+                                style={{ fontFamily: "Staatliches" }}
                             />
                         </Form.Item>
                     </Form>

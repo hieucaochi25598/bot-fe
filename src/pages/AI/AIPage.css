@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "Staatliches";
+    src: url("../../assets/Staatliches-Regular.ttf") format("truetype");
+}
+
 .title-add-ai-modal {
     color: #272833;
     pointer-events: none;
@@ -45,4 +50,32 @@
 .ant-btn.add-ai-btn:hover {
     background-color: #f2fed1 !important;
     color: #272833 !important;
+}
+
+.title-add-ai-modal {
+ font-family: "Staatliches", cursive;
+ font-weight: 400;
+ font-size: 20px;
+ line-height: 25px;
+ width: 150px;
+ height: 43px;
+ border: 1.5px solid #272833;
+ box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.type-title {
+    font-family: "Staatliches", cursive;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 36px;
+    color: #272833;
+}
+
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: #363636 !important; 
+    font-weight: 500;
+ }
+
+ .ant-tabs-ink-bar {
+    border-bottom: 2px solid #363636;
 }

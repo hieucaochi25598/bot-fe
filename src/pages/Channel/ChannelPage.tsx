@@ -38,7 +38,12 @@ const ChannelPage = () => {
 
     return (
         <>
-            <Flex gap="large" vertical>
+            <Flex gap="large" vertical justify="space-between">
+                <span
+                    style={{ fontSize: 24, fontWeight: 400, fontFamily: "Staatliches" }}
+                >
+                    #DATA
+                </span>
                 <InputChannel />
                 <ChannelTable isLoading={isLoadingFetchChannelsData} />
             </Flex>

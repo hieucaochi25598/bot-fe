@@ -70,3 +70,12 @@
     line-height: 36px;
     color: #272833;
 }
+
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: #363636 !important; 
+    font-weight: 500;
+ }
+
+ .ant-tabs-ink-bar {
+    border-bottom: 2px solid #363636;
+}

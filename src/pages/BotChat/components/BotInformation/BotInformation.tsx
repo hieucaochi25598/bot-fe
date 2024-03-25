@@ -19,7 +19,7 @@ const BotInformation = () => {
                 </div>
                 <Flex className="bot-information" vertical gap="middle">
                     <div className="bot-information-name">
-                        <span>NAME</span>
+                        <span>NAME </span>
                         <span>{botChatInformation.name}</span>
                     </div>
                     <div className="bot-information-token">

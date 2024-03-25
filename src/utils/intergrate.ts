@@ -31,7 +31,7 @@ export const buildInitialNodesBotChat = (array: any[], type: string) => {
         return {
             id: e._id,
             type: type,
-            position: { x: 1000, y },
+            position: { x: 1150, y },
             data: { ...e },
         };
     });
